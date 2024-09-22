@@ -8,6 +8,7 @@ import { User } from './users.model';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // POST /api/v1/add-user: Adds a new user to the database
   @Post('add-user')
   async addUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     const user = await this.usersService.createUser(createUserDto);
@@ -15,6 +16,7 @@ export class UsersController {
     return user;
   }
 
+  // GET /api/v1/get-user/:id: Retrieves a user by ID
   @Get('get-user/:id')
   async getUser(@Param('id') id: string): Promise<User> {
     return this.usersService.getUserById(id);
