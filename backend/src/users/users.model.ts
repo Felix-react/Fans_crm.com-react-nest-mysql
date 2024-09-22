@@ -1,14 +1,32 @@
-// src/users/users.model.ts
-import { Table, Column, Model } from 'sequelize-typescript';
+import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
-@Table
+@Table({
+  timestamps: false, // Disable automatic timestamps
+  tableName: 'Users', // Specify the table name to ensure it's correctly mapped
+})
 export class User extends Model<User> {
-  @Column
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
   name: string;
 
-  @Column
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+    unique: true,
+  })
   email: string;
 
-  @Column
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  password: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
   phone: string;
 }
