@@ -1,18 +1,20 @@
-// src/users/dto/create-user.dto.ts
+// src/auth/dto/signup-auth.dto.ts
 import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
 
-export class CreateUserDto {
+export class SignupAuthDto {
   @IsString()
   @IsNotEmpty()
   name: string;
 
   @IsEmail()
+  @IsNotEmpty()
   email: string;
 
   @IsString()
   @IsNotEmpty()
-  phone: string;
-
-  @IsNotEmpty()
   password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  phone: string; // Add any other fields you need for user creation
 }

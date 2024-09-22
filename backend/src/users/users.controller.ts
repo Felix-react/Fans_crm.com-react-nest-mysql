@@ -1,24 +1,33 @@
 // src/users/users.controller.ts
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  NotFoundException,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { SignupAuthDto } from '../auth/dto/signup-auth.dto';
 import { User } from './users.model';
 
-@Controller('api/v1')
+@Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // POST /api/v1/add-user: Adds a new user to the database
-  @Post('add-user')
-  async addUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    const user = await this.usersService.createUser(createUserDto);
-    console.log('User added:', user);
-    return user;
+  // Create a new user (sign up)
+  @Post('create')
+  async createUser(@Body() signupAuthDto: SignupAuthDto): Promise<User> {
+    return this.usersService.createUser(signupAuthDto);
   }
 
-  // GET /api/v1/get-user/:id: Retrieves a user by ID
-  @Get('get-user/:id')
-  async getUser(@Param('id') id: string): Promise<User> {
-    return this.usersService.getUserById(id);
+  // Get user by ID
+  @Get(':id')
+  async getUserById(@Param('id') id: string): Promise<User> {
+    const user = await this.usersService.getUserById(id);
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    return user;
   }
 }
