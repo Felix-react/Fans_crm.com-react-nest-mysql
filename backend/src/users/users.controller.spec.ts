@@ -1,24 +1,18 @@
-// src/users/users.controller.ts
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './users.model';
+import { Test, TestingModule } from '@nestjs/testing';
+import { UsersController } from './users.controller';
 
-@Controller('api/v1')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+describe('UsersController', () => {
+  let controller: UsersController;
 
-  // POST /api/v1/add-user: Adds a new user to the database
-  @Post('add-user')
-  async addUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    const user = await this.usersService.createUser(createUserDto);
-    console.log('User added:', user);
-    return user;
-  }
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [UsersController],
+    }).compile();
 
-  // GET /api/v1/get-user/:id: Retrieves a user by ID
-  @Get('get-user/:id')
-  async getUser(@Param('id') id: string): Promise<User> {
-    return this.usersService.getUserById(id);
-  }
-}
+    controller = module.get<UsersController>(UsersController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});

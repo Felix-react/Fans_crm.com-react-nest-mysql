@@ -4,11 +4,19 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { User } from './users.model';
+import { APP_PIPE } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 
 @Module({
   imports: [SequelizeModule.forFeature([User])],
   controllers: [UsersController],
-  providers: [UsersService],
-  exports: [UsersService], // Export UsersService for use in other modules
+  providers: [
+    UsersService,
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
+  exports: [UsersService], // Export UsersService
 })
 export class UsersModule {}

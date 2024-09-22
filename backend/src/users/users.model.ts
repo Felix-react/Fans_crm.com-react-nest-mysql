@@ -2,7 +2,8 @@
 import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
 @Table({
-  timestamps: true,
+  timestamps: false, // Disable timestamps to prevent Sequelize from adding createdAt and updatedAt fields
+  tableName: 'Users', // Ensure the table name is correct
 })
 export class User extends Model<User> {
   @Column({
