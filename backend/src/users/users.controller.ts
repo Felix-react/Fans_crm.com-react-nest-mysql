@@ -11,7 +11,7 @@ import { UsersService } from './users.service';
 import { SignupAuthDto } from '../auth/dto/signup-auth.dto';
 import { User } from './users.model';
 
-@Controller('users')
+@Controller('api/v1')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
