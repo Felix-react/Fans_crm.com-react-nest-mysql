@@ -30,7 +30,7 @@ const UserProfile: React.FC = () => {
           const userId = decoded.sub;
 
           const response = await axios.get(
-            `http://localhost:3000/api/v1/${userId}`,
+            `http://localhost:8081/api/v1/${userId}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             },

@@ -17,7 +17,7 @@ const SignupForm: React.FC = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/v1/signup', // Updated to match the Nest.js controller
+        'http://localhost:8081/api/v1/signup', // Updated to match the Nest.js controller
         {
           name,
           email,
