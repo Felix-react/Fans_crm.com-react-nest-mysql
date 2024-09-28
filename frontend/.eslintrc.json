@@ -1,32 +1,26 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "jest": true // Add this line to recognize Jest globals
+    "es2021": true
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended" // Extend TypeScript recommended rules
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
   ],
-  "parser": "@typescript-eslint/parser", // Set the parser for TypeScript files
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 12,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
-    "indent": ["error", 4],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "double"],
-    "semi": ["error", "always"],
-    "no-unused-vars": "warn", // Set to warn to catch unused vars but not error out
-    "no-undef": "off" // Disable no-undef rule to prevent errors for Jest globals
-  },
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }] // Allow unused vars starting with an underscore
-      }
-    }
-  ]
+    "prettier/prettier": "error",
+    "no-unused-vars": "warn",
+    "react/react-in-jsx-scope": "off"
+  }
 }

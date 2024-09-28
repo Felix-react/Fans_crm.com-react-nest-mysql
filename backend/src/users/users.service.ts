@@ -3,7 +3,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './users.model';
 import { SignupAuthDto } from '../auth/dto/signup-auth.dto';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -17,13 +16,13 @@ export class UsersService {
     const { name, email, phone, password } = signupAuthDto;
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User();
     user.name = name;
     user.email = email;
     user.phone = phone;
-    user.password = hashedPassword;
+    user.password = password;
     return user.save();
   }
 

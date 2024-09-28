@@ -1,19 +1,28 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './index.css';
+import App from './App';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
+import UserProfile from './components/UserProfile';
+import { AuthProvider } from './context/AuthContext'; // Adjust the path accordingly
+import 'tailwindcss/tailwind.css';
+const router = createBrowserRouter([
+  { path: '/', element: <App /> },
+  { path: '/login', element: <LoginForm /> },
+  { path: '/signup', element: <SignupForm /> },
+  { path: '/profile', element: <UserProfile /> },
+]);
 
+// Render the application
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 root.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
+  <React.StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </React.StrictMode>,
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
